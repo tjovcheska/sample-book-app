@@ -46,6 +46,7 @@ pipeline {
 
 def build_docker_image(){
     echo "Building docker image.."
+    sh 'ls'
 }
 
 def run_unit_tests(){
