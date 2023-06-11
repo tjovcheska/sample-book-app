@@ -8,51 +8,37 @@ pipeline {
         }
         stage('unit-tests') {
             steps {
-                script{
-                    run_unit_tests()
-                }
+                run_unit_tests()
             }
         }
         stage('deploy-dev') {
             steps {
-                script{
-                    deploy("DEV")
-                }
+                deploy("DEV")
             }
         }
         stage('api-integration-tests-dev') {
             steps {
-                script{
-                    run_api_tests("DEV")
-                }
+                run_api_tests("DEV")
             }
         }
         stage('deploy-stg') {
             steps {
-                script{
-                    deploy("STG")
-                }
+                deploy("STG")
             }
         }
         stage('api-integration-tests-stg') {
             steps {
-                script{
-                    run_api_tests("STG")
-                }
+                run_api_tests("STG")
             }
         }
         stage('deploy-prd') {
             steps {
-                script{
-                    deploy("PRD")
-                }
+                deploy("PRD")
             }
         }
         stage('api-integration-tests-prd') {
             steps {
-                script{
-                    run_api_tests("PRD")
-                }
+                run_api_tests("PRD")
             }
         }
     }
