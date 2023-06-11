@@ -3,43 +3,75 @@ pipeline {
     stages {
         stage('build-docker-image') {
             steps {
-                echo 'Building docker image..'
+                scripts{
+                    build_docker_image()
+                }
             }
         }
         stage('unit-tests') {
             steps {
-                echo 'Runnning unit tests for node application in docker container..'
+                scripts{
+                    run_unit_tests()
+                }
             }
         }
         stage('deploy-dev') {
             steps {
-                echo 'Deployment triggered on DEV environment..'
+                scripts{
+                    deploy("DEV")
+                }
             }
         }
         stage('api-integration-tests-dev') {
             steps {
-                echo 'Deployment triggered on DEV environment..'
+                scripts{
+                    run_api_tests("DEV")
+                }
             }
         }
         stage('deploy-stg') {
             steps {
-                echo 'Deployment triggered on STG environment..'
+                scripts{
+                    deploy("STG")
+                }
             }
         }
         stage('api-integration-tests-stg') {
             steps {
-                echo 'Deployment triggered on STG environment..'
+                scripts{
+                    run_api_tests("STG")
+                }
             }
         }
         stage('deploy-prd') {
             steps {
-                echo 'Deployment triggered on PRD environment..'
+                scripts{
+                    deploy("PRD")
+                }
             }
         }
         stage('api-integration-tests-prd') {
             steps {
-                echo 'Deployment triggered on PRD environment..'
+                scripts{
+                    run_api_tests("PRD")
+                }
             }
         }
     }
+}
+
+def build_docker_image(){
+    echo "Building docker image.."
+}
+
+def run_unit_tests(){
+    echo "Runnning unit tests for node application in docker container.."
+}
+
+def deploy(String environment){
+    echo "Deployment triggered on ${environment} environment.."
+}
+
+def run_api_tests(String environment){
+    echo "API tests triggered on ${environment} environment.."
 }
