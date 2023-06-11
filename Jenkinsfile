@@ -3,9 +3,7 @@ pipeline {
     stages {
         stage('build-docker-image') {
             steps {
-                script{
-                    build_docker_image()
-                }
+                build_docker_image()
             }
         }
         stage('unit-tests') {
