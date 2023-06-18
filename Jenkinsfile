@@ -65,5 +65,5 @@ def run_api_tests(String environment){
     sh "mkdir test-reports"
     sh "mkdir test-reports/${environment}"
     sh "mkdir ${environment}"
-    sh "docker run -v $PWD/test-reports/dev:/api-test-automation/mochawesome-report/ --network=host --rm teodorajovcheska7/api-tests run BOOKS BOOKS_${environment}"
+    sh "docker run -v ${PWD}/test-reports/dev:/api-test-automation/mochawesome-report/ --network=host --rm teodorajovcheska7/api-tests run BOOKS BOOKS_${environment}"
 }
