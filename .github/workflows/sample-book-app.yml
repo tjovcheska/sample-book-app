@@ -16,6 +16,9 @@ jobs:
     needs: [build-docker-image]
     steps:
       - uses: actions/checkout@v3
+      - uses: ./.github/actions/deploy
+        with: 
+          enviornment: 'dev'
       - name: Step description
         run: echo "Deployment triggered on DEV env..."
   api-integration-tests-dev:
@@ -30,6 +33,9 @@ jobs:
     needs: [api-integration-tests-dev]
     steps:
       - uses: actions/checkout@v3
+      - uses: ./.github/actions/deploy
+        with: 
+          enviornment: 'stg'
       - name: Step description
         run: echo "Deployment triggered on STG env..."
   api-integration-tests-stg:
@@ -44,6 +50,9 @@ jobs:
     needs: [api-integration-tests-stg]
     steps:
       - uses: actions/checkout@v3
+      - uses: ./.github/actions/deploy
+        with: 
+          enviornment: 'prd'
       - name: Step description
         run: echo "Deployment triggered on PRD env..."
   api-integration-tests-prd:
