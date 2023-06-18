@@ -6,11 +6,11 @@ runs:
     - run: echo "Building docker image and pushing it to docker registry.."
       shell: bash
     - name: Build docker image
-      run: sh "docker build --no-cache -t teodorajovcheska7/sample-book-app ."
+      run: docker build --no-cache -t teodorajovcheska7/sample-book-app .
       shell: bash
     - name: Runnning unit tests for node application in docker container..
-      run: sh "docker run --rm --entrypoint=npm teodorajovcheska7/sample-book-app run test"
+      run: docker run --rm --entrypoint=npm teodorajovcheska7/sample-book-app run test
       shell: bash
     - name: Pushing docker image to docker registry..
-      run: sh "docker push teodorajovcheska7/sample-book-app"
+      run: docker push teodorajovcheska7/sample-book-app
       shell: bash
