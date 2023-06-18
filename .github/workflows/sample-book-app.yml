@@ -1,11 +1,19 @@
+# This is a basic workflow to help you get started with Actions
+
 name: Sample Book App Workflow
 
+# Controls when the workflow will run
 on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  # This workflow contains a single job called "build"
   build-docker-image:
     runs-on: self-hosted
     steps:
@@ -17,48 +25,45 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/deploy
-        with: 
-          enviornment: 'dev'
-      - name: Step description
-        run: echo "Deployment triggered on DEV env..."
+        with:
+          environment: 'dev'
   api-integration-tests-dev:
     runs-on: self-hosted
     needs: [deploy-dev]
     steps:
       - uses: actions/checkout@v3
-      - name: Step description
-        run: echo "API tests tirggered on DEV env..."
+      - uses: ./.github/actions/test
+        with:
+          environment: 'DEV'
   deploy-stg:
     runs-on: self-hosted
     needs: [api-integration-tests-dev]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/deploy
-        with: 
-          enviornment: 'stg'
-      - name: Step description
-        run: echo "Deployment triggered on STG env..."
+        with:
+          environment: 'stg'
   api-integration-tests-stg:
     runs-on: self-hosted
     needs: [deploy-stg]
     steps:
       - uses: actions/checkout@v3
-      - name: Step description
-        run: echo "API tests tirggered on STG env..."
+      - uses: ./.github/actions/test
+        with:
+          environment: 'STG'
   deploy-prd:
     runs-on: self-hosted
     needs: [api-integration-tests-stg]
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/deploy
-        with: 
-          enviornment: 'prd'
-      - name: Step description
-        run: echo "Deployment triggered on PRD env..."
+        with:
+          environment: 'prd'
   api-integration-tests-prd:
     runs-on: self-hosted
     needs: [deploy-prd]
     steps:
       - uses: actions/checkout@v3
-      - name: Step description
-        run: echo "API tests tirggered on PRD env..."
+      - uses: ./.github/actions/test
+        with:
+          environment: 'PRD'
