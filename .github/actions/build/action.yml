@@ -4,6 +4,7 @@ runs:
   using: "composite"
   steps:
     - run: echo "Building docker image and pushing it to docker registry.."
+      shell: bash
     - name: Build docker image
       run: sh "docker build --no-cache -t teodorajovcheska7/sample-book-app ."
       shell: bash
