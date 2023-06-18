@@ -13,7 +13,7 @@ pipeline {
         }
         stage('api-integration-tests-dev') {
             steps {
-                run_api_tests("dev")
+                run_api_tests("DEV")
             }
         }
         stage('deploy-stg') {
@@ -23,7 +23,7 @@ pipeline {
         }
         stage('api-integration-tests-stg') {
             steps {
-                run_api_tests("stg")
+                run_api_tests("STG")
             }
         }
         stage('deploy-prd') {
@@ -33,7 +33,7 @@ pipeline {
         }
         stage('api-integration-tests-prd') {
             steps {
-                run_api_tests("prd")
+                run_api_tests("PRD")
             }
         }
     }
@@ -42,23 +42,22 @@ pipeline {
 def build_docker_image(){
     echo "Building docker image.."
     sh "docker build --no-cache -t teodorajovcheska7/sample-book-app ."
-    
+
     echo "Runnning unit tests for node application in docker container.."
     sh "docker run --rm --entrypoint=npm teodorajovcheska7/sample-book-app run test"
-    
-    echo "Pushing docker image to docker registry..."
+
+    echo "Pushing docker image to docker registry.."
     sh "docker push teodorajovcheska7/sample-book-app"
 }
 
 def deploy(String environment){
     echo "Deployment triggered on ${environment} environment.."
-    sh "docker-compose stop sample-book-app-${enviornment}"
-    sh "docker-compose rm sample-book-app-${enviornment}"
-    sh "docker-compose up -d sample-book-app-${enviornment}"
+    sh "docker-compose stop sample-book-app-${environment}"
+    sh "docker-compose rm sample-book-app-${environment}"
+    sh "docker-compose up -d sample-book-app-${environment}"
 }
 
 def run_api_tests(String environment){
-    git branch: 'main', poll: false, url: 'https://github.com/tjovcheska/course-js-api-framework.git'
     echo "API tests triggered on ${environment} environment.."
     sh "ls"
 }
