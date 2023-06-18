@@ -1,0 +1,50 @@
+name: Sample Book App Workflow
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build-docker-image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Step description
+        run: echo "Building Docker image..."
+  deploy-dev:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Step description
+        run: echo "Deployment triggered on DEV env..."
+  api-integration-tests-dev:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Step description
+        run: echo "API tests tirggered on DEV env..."
+  deploy-stg:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Step description
+        run: echo "Deployment triggered on STG env..."
+  api-integration-tests-stg:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Step description
+        run: echo "API tests tirggered on STG env..."
+  deploy-prd:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Step description
+        run: echo "Deployment triggered on PRD env..."
+  api-integration-tests-prd:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Step description
+        run: echo "API tests tirggered on PRD env..."
