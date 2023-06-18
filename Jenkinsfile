@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    triggers {
+        pollSCM('*/1 * * * *')
+    }
     stages {
         stage('build-docker-image') {
             steps {
@@ -59,5 +62,5 @@ def deploy(String environment){
 
 def run_api_tests(String environment){
     echo "API tests triggered on ${environment} environment.."
-    sh "ls"
+    sh "docker run --network=host --rm teodorajovcheska7/api-tests run BOOKS BOOKS_${environment}"
 }
