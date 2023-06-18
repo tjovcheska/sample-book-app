@@ -10,8 +10,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
-      - name: Step description
-        run: echo "Building Docker image..."
+      - uses: ./.github/actions/build
   deploy-dev:
     runs-on: self-hosted
     needs: [build-docker-image]
