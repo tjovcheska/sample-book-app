@@ -53,7 +53,7 @@ def build_docker_image(){
 def deploy(String environment){
     echo "Deployment triggered on ${environment} environment.."
     sh "docker-compose down"
-    sh "docker-compose up sample-book-app-${enviornment}"
+    sh "docker-compose up -d sample-book-app-${enviornment}"
 }
 
 def run_api_tests(String environment){
