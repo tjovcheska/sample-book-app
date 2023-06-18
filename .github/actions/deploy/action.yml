@@ -1,0 +1,20 @@
+name: 'Deploy Sample Book App'
+description: 'Action to deploy Sample Book App on specified environment'
+inputs:
+  environment:
+    description: 'Environment where to deploy Sample Book Application'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - run: echo "Deployment triggered on ${{ inputs.environment}} environment.."
+      shell: bash
+    - name: Stop previous container
+      run: docker-compose stop sample-book-app-${{ inputs.environment}}
+      shell: bash
+    - name: Remove stopped container
+      run: docker-compose rm sample-book-app-${{ inputs.environment}}
+      shell: bash
+    - name: Run new container
+      run: docker-compose up -d sample-book-app-${{ inputs.environment}}
+      shell: bash
