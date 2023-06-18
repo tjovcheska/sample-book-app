@@ -7,48 +7,48 @@ on:
 
 jobs:
   build-docker-image:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
       - name: Step description
         run: echo "Building Docker image..."
   deploy-dev:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [build-docker-image]
     steps:
       - uses: actions/checkout@v3
       - name: Step description
         run: echo "Deployment triggered on DEV env..."
   api-integration-tests-dev:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [deploy-dev]
     steps:
       - uses: actions/checkout@v3
       - name: Step description
         run: echo "API tests tirggered on DEV env..."
   deploy-stg:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [api-integration-tests-dev]
     steps:
       - uses: actions/checkout@v3
       - name: Step description
         run: echo "Deployment triggered on STG env..."
   api-integration-tests-stg:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [deploy-stg]
     steps:
       - uses: actions/checkout@v3
       - name: Step description
         run: echo "API tests tirggered on STG env..."
   deploy-prd:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [api-integration-tests-stg]
     steps:
       - uses: actions/checkout@v3
       - name: Step description
         run: echo "Deployment triggered on PRD env..."
   api-integration-tests-prd:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: [deploy-prd]
     steps:
       - uses: actions/checkout@v3
